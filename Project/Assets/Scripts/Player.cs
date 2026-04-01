@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
     public Rigidbody2D rb;
     public float _currentSpeed = 0f;
     public float _maxSpeed = 8f;
+    public float _boostSpeed = 10f;
     public float _acceleration = 4f;
     public float _deceleration = 10f;
     public float _turnDeceleration = 20f;
@@ -25,12 +26,23 @@ public class Player : MonoBehaviour
         {
             rb.AddForceY(_jumpStrenght, ForceMode2D.Impulse);
         }
+        if (Input.GetKeyDown(KeyCode.LeftShift) && _currentSpeed >= 0f)
+        {
+
+            _currentSpeed = _boostSpeed;
+        }
+        else if (Input.GetKeyDown(KeyCode.LeftShift)){ 
+          
+            _currentSpeed = -_boostSpeed; }
+        ;
     }
 
-    private void FixedUpdate()
-    {
-        Movement();
-    }
+
+
+            private void FixedUpdate()
+            {
+                Movement();
+            }
 
     void Movement()
     {
